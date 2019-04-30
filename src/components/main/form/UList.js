@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ListItem from './ListItem';
 
 class UList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    render (){
-        let {questions} = this.props.state.questionsBook;
-     
+    render() {
+        let { questions } = this.props.state.questionsBook;
+
         return (
             <div>
                 <ul>
                     {
-                        questions.map((question, index)=>(
-                            <ListItem question = {{question, index}} />
+                        questions.map((question, index) => (
+                            <ListItem question={{ question, index }} />
                         ))
                     }
                 </ul>

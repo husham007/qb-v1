@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Button from './Button';
 
 class ListItem extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    render (){
+    render() {
         let question = this.props.question.question;
         return (
             <div>
                 <li>
-                {question.statement}
-               <button >Delete</button>
-               <button>Edit</button>
-                
-                   
+                    {question.statement}
+                    <button >Delete</button>
+                    <button>Edit</button>
+
+
                 </li>
             </div>
         );

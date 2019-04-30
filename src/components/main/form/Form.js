@@ -18,7 +18,7 @@ class Form extends React.Component {
         return (
             <div>
 
-            <UList state = {this.props.state}/ > 
+                <UList state={this.props.state} />
                 <TextArea state={this.props.state} formHandle={this.props.stateHandle} type='statement' />
                 <List
                     stateHandle={this.props.stateHandle}
@@ -44,7 +44,7 @@ class Form extends React.Component {
                 />
 
                 <TextArea state={this.props.state} formHandle={this.props.stateHandle} type='answer' />
-                <Button text = 'Save' saveHandle = {this.props.saveHandle} />
+                <Button text='Save' saveHandle={this.props.saveHandle} />
             </div>
         );
     }

@@ -22,22 +22,22 @@ class App extends Component {
 
     this.stateHandler = this.stateHandler.bind(this);
     this.saveHandler = this.saveHandler.bind(this);
-    
+
   }
 
   stateHandler(obj) {
     //obj[Object.keys(obj)[0]]
-    
-   let form = this.state.form;
-   console.log(obj[0]);
-   form[Object.keys(obj)[0]] = obj[Object.keys(obj)[0]];
-   
+
+    let form = this.state.form;
+    console.log(obj[0]);
+    form[Object.keys(obj)[0]] = obj[Object.keys(obj)[0]];
+
     this.setState({
       form: form
     });
   }
 
-  saveHandler(){
+  saveHandler() {
     let qB = this.state.questionsBook;
     qB.questions.push({
       statement: this.state.form.statement,
@@ -47,18 +47,19 @@ class App extends Component {
       marks: this.state.form.marks
     });
 
-    
-    this.setState({      
-      form: { statement: '',
-      type: "short",
-      category: "general",
-      marks: '1',
-      complexityLevel: 'easy'
-      }, 
+
+    this.setState({
+      form: {
+        statement: '',
+        type: "short",
+        category: "general",
+        marks: '1',
+        complexityLevel: 'easy'
+      },
       questionsBook: qB
-     
+
     });
-  
+
   }
 
 
@@ -67,10 +68,10 @@ class App extends Component {
   render() {
     console.log(this.state);
     return (<div className="App">
-      
-        hello qb-v1
-      <Form state={this.state} stateHandle={this.stateHandler} saveHandle = {this.saveHandler}/>      
-      
+
+      hello qb-v1
+      <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} />
+
     </div>);
   }
 }

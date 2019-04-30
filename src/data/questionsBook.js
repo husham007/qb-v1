@@ -1,7 +1,7 @@
 const questionsBook = {
   type: ['short', 'long', 'trueFalse', 'MCQ', 'programming'],
   category: ['general', 'loops', 'variables', 'classes'],
-  complexityLevel: ['easy', 'intermediate', 'difficult', 'advance'], 
+  complexityLevel: ['easy', 'intermediate', 'difficult', 'advance'],
   marks: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
   questions: [
 
