@@ -43,7 +43,7 @@ class Form extends React.Component {
                 />
 
                 <TextArea state={this.props.state} formHandle={this.props.stateHandle} type='answer' />
-                <Button text='Save' saveHandle={this.props.saveHandle} />
+                <Button text={this.props.mode} saveHandle={this.props.saveHandle} />
             </div>
         );
     }

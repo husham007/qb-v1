@@ -26,6 +26,7 @@ class App extends Component {
     this.saveHandler = this.saveHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.editHandler = this.editHandler.bind(this);
+    this.updateHandler = this.updateHandler.bind(this);
 
   }
 
@@ -41,7 +42,10 @@ class App extends Component {
     });
   }
 
-  saveHandler() {
+  saveHandler(index) {
+
+    console.log(index);
+
     let qB = this.state.questionsBook;
     qB.questions.push({
       statement: this.state.form.statement,
@@ -66,9 +70,7 @@ class App extends Component {
 
   }
 
-  updateHandler(state){
-    
-  }
+  
 
 
   deleteHandler(statement) {
@@ -105,6 +107,28 @@ class App extends Component {
   }
 
   editHandler(statement) {
+
+    if (this.state.form.editMode){
+      delete this.state.form.editMode;
+    } else
+    {
+      let index = this.state.questionsBook.questions.findIndex(question => {
+        return question.statement === statement;
+      });
+  
+      let question = this.state.questionsBook.questions[index];
+  
+      let form = this.state.form;
+      form.category = question.category;
+      form.type = question.type;
+      form.statement = question.statement;
+      form.answer = question.answer;
+      form.marks = question.marks;
+      form.complexityLevel = question.complexityLevel;
+      form.id = question.id;
+      form.editMode = { index, value: true };
+      this.setState({ form: form });
+    }
     /* let index = questions.questions.findIndex(question => {
        return question.statement === statement;
      });
@@ -116,22 +140,11 @@ class App extends Component {
        editMode: index
      });*/
 
-    let index = this.state.questionsBook.questions.findIndex(question => {
-      return question.statement === statement;
-    });
+    
+  }
 
-    let question = this.state.questionsBook.questions[index];
+  updateHandler(question){
 
-    let form = this.state.form;
-    form.category = question.category;
-    form.type = question.type;
-    form.statement = question.statement;
-    form.answer = question.answer;
-    form.marks = question.marks;
-    form.complexityLevel = question.complexityLevel;
-    form.id = question.id;
-    form.editMode = { index, value: true };
-    this.setState({ form: form });
   }
 
   render() {
@@ -142,8 +155,10 @@ class App extends Component {
         hello qb-v1
       <UList state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} deleteHandle={this.deleteHandler} editHandle={this.editHandler} />
 
-
-        <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} />
+      {
+        this.state.form.editMode === undefined ?  <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} mode = 'Save'/> : null
+      }
+       
 
       </div>);
   }
