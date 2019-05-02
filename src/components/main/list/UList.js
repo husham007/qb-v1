@@ -14,7 +14,8 @@ class UList extends Component {
                 <ul>
                     {
                         questions.map((question, index) => (
-                            <ListItem question={{ question, index }} />
+                            
+                            <ListItem state = {this.props.state} question={{ question: question, index: index }} editHandle={this.props.editHandle} deleteHandle={this.props.deleteHandle} stateHandle = {this.props.stateHandle} saveHandle = {this.props.saveHandle}/>
                         ))
                     }
                 </ul>

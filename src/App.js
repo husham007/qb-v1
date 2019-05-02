@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import questionsBook from './data/questionsBook';
 import Form from './components/main/form/Form';
+import UList from './components/main/list/UList';
 
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
         type: 'short',
         category: 'general',
         complexityLevel: 'easy',
-        answer: ''
+        answer: '',
+        id: ''
       },
 
       questionsBook: questionsBook
@@ -22,6 +24,8 @@ class App extends Component {
 
     this.stateHandler = this.stateHandler.bind(this);
     this.saveHandler = this.saveHandler.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
+    this.editHandler = this.editHandler.bind(this);
 
   }
 
@@ -62,17 +66,86 @@ class App extends Component {
 
   }
 
+  updateHandler(state){
+    
+  }
 
 
+  deleteHandler(statement) {
+    /* let index = questions.questions.findIndex(question => {
+       return question.statement === statement;
+     });
+ 
+     ///console.log(index);
+ 
+     questions.questions.splice(index, 1);
+     console.log(questions.questions);
+ 
+     this.setState({
+       question: questions.questions
+     });*/
+
+    let questions = this.state.questionsBook.questions;
+    let filteredQuestions = questions.filter(question =>
+      question.statement !== statement
+    );
+
+    let newState = this.state;
+    newState.form = {
+      statement: '',
+      type: "short",
+      category: "general",
+      marks: '1',
+      complexityLevel: 'easy',
+      answer: ''
+    }
+    newState.questionsBook.questions = filteredQuestions;
+    this.setState(newState);
+
+  }
+
+  editHandler(statement) {
+    /* let index = questions.questions.findIndex(question => {
+       return question.statement === statement;
+     });
+ 
+     this.setState({
+       statement: questions.questions[index].statement,
+       type: questions.questions[index].type,
+       category: questions.questions[index].category,
+       editMode: index
+     });*/
+
+    let index = this.state.questionsBook.questions.findIndex(question => {
+      return question.statement === statement;
+    });
+
+    let question = this.state.questionsBook.questions[index];
+
+    let form = this.state.form;
+    form.category = question.category;
+    form.type = question.type;
+    form.statement = question.statement;
+    form.answer = question.answer;
+    form.marks = question.marks;
+    form.complexityLevel = question.complexityLevel;
+    form.id = question.id;
+    form.editMode = { index, value: true };
+    this.setState({ form: form });
+  }
 
   render() {
-    console.log(this.state);
-    return (<div className="App">
 
-      hello qb-v1
-      <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} />
+    return (
+      <div className="App">
 
-    </div>);
+        hello qb-v1
+      <UList state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} deleteHandle={this.deleteHandler} editHandle={this.editHandler} />
+
+
+        <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} />
+
+      </div>);
   }
 }
 

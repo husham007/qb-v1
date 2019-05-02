@@ -1,8 +1,7 @@
 import React from 'react';
 import TextArea from './TextArea';
 import List from './List';
-import Button from './Button'
-import UList from './UList'
+import Button from './Button';
 
 
 
@@ -18,7 +17,7 @@ class Form extends React.Component {
         return (
             <div>
 
-                <UList state={this.props.state} />
+
                 <TextArea state={this.props.state} formHandle={this.props.stateHandle} type='statement' />
                 <List
                     stateHandle={this.props.stateHandle}
