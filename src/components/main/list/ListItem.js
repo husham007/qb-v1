@@ -6,10 +6,9 @@ class ListItem extends Component {
         super(props);
 
         
-    this.deleteHandle = this.handleDelete.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleUpdate = this.handleUpdate.bind(this);
-    
+    this.deleteHandle = this.deleteHandle.bind(this);
+    this.editHandle = this.editHandle.bind(this);
+    this.updateHandle = this.updateHandle.bind(this);    
     
     }
 
@@ -25,7 +24,7 @@ class ListItem extends Component {
         this.props.editHandle(event.target.value);
       }
 
-      updateHandle(event){
+      updateHandle(){
         this.props.updateHandle();
       }
 
@@ -41,11 +40,11 @@ class ListItem extends Component {
             <div>
                 <li>
                     {question.statement}
-                    <button value =  {question.statement} onClick = {this.handleDelete}>Delete</button>
-                    <button value =  {question.statement} onClick = {this.handleEdit}>Edit</button>
+                    <button value =  {question.statement} onClick = {this.deleteHandle}>Delete</button>
+                    <button value =  {question.statement} onClick = {this.editHandle}>Edit</button>
                     {
                           (editMode!== undefined && index === editMode.index) ?
-                          <Form state={this.props.state} stateHandle={this.props.stateHandle} saveHandle={this.props.saveHandle(index)} mode = 'Update' appState = {this.props.state} />   : null
+                          <Form state={this.props.state} stateHandle={this.props.stateHandle} updateHandle={this.updateHandle} mode = 'Update' appState = {this.props.state} />   : null
 
                     }
                   

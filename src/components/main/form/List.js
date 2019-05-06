@@ -19,7 +19,7 @@ class List extends React.Component {
     }
     render() {
         let types = this.props.state.questionsBook[this.props.listType];
-        console.log(this.props.listType);
+        //console.log(this.props.listType);
         return (
             <div className="save">
                 <h3>{this.props.type}</h3>

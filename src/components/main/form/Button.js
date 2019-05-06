@@ -13,7 +13,13 @@ class Save extends React.Component {
 
     handleButton(event) {
         // console.log(this.props.parentState.val);
-        this.props.saveHandle();
+        if(this.props.state.form.editMode!== undefined){
+            this.props.updateHandle();
+        }
+        else {
+            this.props.saveHandle();
+        }
+      
         // this.props.parentState.setState({val: event.target.value});
     }
     render() {

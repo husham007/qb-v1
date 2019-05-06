@@ -42,9 +42,9 @@ class App extends Component {
     });
   }
 
-  saveHandler(index) {
+  saveHandler() {
 
-    console.log(index);
+    console.log('save handler');
 
     let qB = this.state.questionsBook;
     qB.questions.push({
@@ -108,10 +108,12 @@ class App extends Component {
 
   editHandler(statement) {
 
-    if (this.state.form.editMode){
+    console.log('edit Handler');
+
+   /* if (this.state.form.editMode){
       delete this.state.form.editMode;
     } else
-    {
+    {*/
       let index = this.state.questionsBook.questions.findIndex(question => {
         return question.statement === statement;
       });
@@ -128,7 +130,7 @@ class App extends Component {
       form.id = question.id;
       form.editMode = { index, value: true };
       this.setState({ form: form });
-    }
+    
     /* let index = questions.questions.findIndex(question => {
        return question.statement === statement;
      });
@@ -143,8 +145,42 @@ class App extends Component {
     
   }
 
-  updateHandler(question){
+  updateHandler(){
+    if (this.state.form.editMode!== undefined){
+      let questionIndex = this.state.form.editMode.index;
+      //this.state.questionsBook.questions[questionIndex].statement = this.state.form.statement;
+      let qb = this.state.questionsBook;
+      qb.questions[questionIndex].statement = this.state.form.statement;
+      qb.questions[questionIndex].type = this.state.form.type;
+      qb.questions[questionIndex].category = this.state.form.category;
+      qb.questions[questionIndex].complexityLevel = this.state.form.complexityLevel;
+      qb.questions[questionIndex].marks = this.state.form.marks;
+      qb.questions[questionIndex].id = this.state.form.id;
 
+      let form = {
+        statement: '',
+        type: "short",
+        category: "general",
+        marks: '1',
+        complexityLevel: 'easy',
+        answer: ''
+      }
+
+      this.setState({
+        questionsBook: qb,
+        form
+      });
+
+      delete this.state.form.editMode;
+
+
+
+      
+
+
+      
+
+    } 
   }
 
   render() {
@@ -153,10 +189,10 @@ class App extends Component {
       <div className="App">
 
         hello qb-v1
-      <UList state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} deleteHandle={this.deleteHandler} editHandle={this.editHandler} />
+      <UList state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} deleteHandle={this.deleteHandler} editHandle={this.editHandler} updateHandle = {this.updateHandler}/>
 
       {
-        this.state.form.editMode === undefined ?  <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} mode = 'Save'/> : null
+        this.state.form.editMode === undefined ?  <Form state={this.state} stateHandle={this.stateHandler} saveHandle={this.saveHandler} updateHandle = {this.updateHandler} mode = 'Save'/> : null
       }
        
 
